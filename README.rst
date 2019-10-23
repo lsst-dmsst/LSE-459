@@ -1,48 +1,26 @@
-.. image:: https://img.shields.io/badge/dmtn--134-lsst.io-brightgreen.svg
-   :target: https://dmtn-134.lsst.io
-.. image:: https://travis-ci.com/lsst-dm/dmtn-134.svg
-   :target: https://travis-ci.com/lsst-dm/dmtn-134
+.. image:: https://img.shields.io/badge/LSE--459-lsst.io-brightgreen.svg
+   :target: https://LSE-459.lsst.io
+.. image:: https://travis-ci.org/lsst/LSE-459.svg
+   :target: https://travis-ci.org/lsst/LSE-459
 
-##########################################################
-Expectations and questions while interacting with DOE labs
-##########################################################
+#######################
+LSST alert production in early operations.
+#######################
 
-DMTN-134
-========
+LSE-459
+-------
 
-SLAC, Fermilab and Brookhaven National Laboratory have been requested to look into supporting LSST computing during the operational era.
-This note is to help both sides in the process of establishing what this means and how LSST can evaluate it.
+LSST alert production in early operations.
 
-Links
-=====
+To compile this document you need to have set up  lsst-texmf, see  https://lsst-texmf.lsst.io. The bin directory of texmf must be in your path for generateAcronyms.py to be found and work. 
 
-- Live drafts: https://dmtn-134.lsst.io
-- GitHub: https://github.com/lsst-dm/dmtn-134
+**Links**
 
-Build
-=====
+- Live drafts: https://LSE-459.lsst.io
+- GitHub: https://github.com/lsst-dmsst/LSE-459
 
-This repository includes lsst-texmf_ as a Git submodule.
-Clone this repository::
+****
 
-    git clone --recurse-submodules https://github.com/lsst-dm/dmtn-134
+Copyright 2019 Association of Universities for Research in Astronomy, Inc.
 
-Compile the PDF::
-
-    make
-
-Clean built files::
-
-    make clean
-
-Updating lsst-texmf
--------------------
-
-`lsst-texmf`_ includes BibTeX files, the ``lsstdoc`` class file, and acronym definitions, among other essential tooling for LSST's LaTeX documentation projects.
-To update to a newer version of `lsst-texmf`_, you can update the submodule in this repository::
-
-   git submodule update --init --recursive
-
-Commit, then push, the updated submodule.
-
-.. _lsst-texmf: https://github.com/lsst/lsst-texmf
+This work is licensed under the Creative Commons Attribution 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by/4.0/.

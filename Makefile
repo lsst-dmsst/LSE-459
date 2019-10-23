@@ -1,49 +1,31 @@
-DOCTYPE = LSE
-DOCNUMBER = 459
-DOCNAME = $(DOCTYPE)-$(DOCNUMBER)
-JOBNAME = $(DOCNAME)
-TEX = $(filter-out $(wildcard *acronyms.tex) , $(wildcard *.tex))
-
-#export TEXMFHOME = lsst-texmf/texmf
-
-# Version information extracted from git.
-GITVERSION := $(shell git log -1 --date=short --pretty=%h)
-GITDATE := $(shell git log -1 --date=short --pretty=%ad)
-GITSTATUS := $(shell git status --porcelain)
-ifneq "$(GITSTATUS)" ""
-	GITDIRTY = -dirty
-endif
-
-$(JOBNAME).pdf: $(DOCNAME).tex meta.tex acronyms.tex
-	xelatex -jobname=$(JOBNAME) $(DOCNAME)
-	bibtex $(JOBNAME)
-	xelatex -jobname=$(JOBNAME) $(DOCNAME)
-	xelatex -jobname=$(JOBNAME) $(DOCNAME)
-	xelatex -jobname=$(JOBNAME) $(DOCNAME)
-
-.FORCE:
-
-meta.tex: Makefile .FORCE
-	rm -f $@
-	touch $@
-	echo '% GENERATED FILE -- edit this in the Makefile' >>$@
-	/bin/echo '\newcommand{\lsstDocType}{$(DOCTYPE)}' >>$@
-	/bin/ecsho '\newcommand{\lsstDocNum}{$(DOCNUMBER)}' >>$@
-	/bin/echo '\newcommand{\vcsrevision}{$(GITVERSION)$(GITDIRTY)}' >>$@
-	/bin/echo '\newcommand{\vcsdate}{$(GITDATE)}' >>$@
+#for dependency you want all tex files  but for acronyms you do not want to include the acronyms file itself.
+tex=$(filter-out $(wildcard *aglossary.tex) , $(wildcard *.tex))  
 
 
-#Traditional acronyms are better in this document
-acronyms.tex : ${TEX} myacronyms.txt skipacronyms.txt
-	echo ${TEXMFHOME}
-	python3 ${TEXMFHOME}/../bin/generateAcronyms.py -t "DM"    $(TEX)
+DOC= LSE-459
+SRC= $(DOC).tex
 
-myacronyms.txt :
-	touch myacronyms.txt
+OBJ=$(SRC:.tex=.pdf)
 
-skipacronyms.txt :
-	touch skipacronyms.txt
+#Default when you type make
+all: $(OBJ)
+
+$(OBJ): $(tex) aglossary.tex
+	latexmk -bibtex -xelatex -f $(SRC)
+	makeglossaries $(DOC)      
+	xelatex $(SRC)
+
+#The generateAcronyms.py  script is in lsst-texmf/bin - put that in the path
+acronyms.tex :$(tex) myacronyms.txt
+	generateAcronyms.py   $(tex)
+
+aglossary.tex :$(tex) myacronyms.txt
+	generateAcronyms.py  -g $(tex)
+	generateAcronyms.py  -g -u $(tex) aglossary.tex
 
 clean :
 	latexmk -c
 	rm *.pdf *.nav *.bbl *.xdv *.snm
+
+
+
