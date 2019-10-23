@@ -1,68 +1,69 @@
-\documentclass[SE,toc, lsstdraft]{lsstdoc}
+\documentclass[DM,lsstdraft]{lsstdoc}
+
 % lsstdoc documentation: https://lsst-texmf.lsst.io/lsstdoc.html
-\input{meta}
 
 % Package imports go here.
 
 % Local commands go here.
-
-%If you want glossaries
 \input{aglossary.tex}
 \makeglossaries
 
-\title[LOY1 Alerts]{LSST Alert Production in Early Operations}
+
+% To add a short-form title:
+% \title[Short title]{Title}
+\title{Alert Production in LSST Operations Year One}
 
 % Optional subtitle
 % \setDocSubtitle{A subtitle}
 
 \author{%
-Leanne P. Guy, .. and others to be added
+Leanne P. Guy and  .....
 }
 
 \setDocRef{LSE-459}
-\setDocUpstreamLocation{\url{https://github.com/lsst-dmsst/lse-459}}
 
-\date{2019-10-17}
+\date{\today}
 
-% Optional: name of the document's curator
-\setDocCurator{Leanne Guy}
+% Optional: name of the document's curator	
+% \setDocCurator{The Curator of this Document}
 
 \setDocAbstract{%
-Clarification of the \gls{LSST} Project plans for \gls{Alert} Production in early operations.}
+LSST \gls{Data Management} (\gls{DM}) \gls{Alert Production} (\gls{AP}) relies on ``transient-free`` coadded template images for difference image analysis (\gls{DIA}). These templates are  produced in the previous year's \gls{Data Release Processing} (\gls{DRP}) and made available in the most recent Data Release (DR). Consequently \gls{Alert Production} cannot run at full scale and full fidelity during commissioning nor the first year of \gls{LSST} operations. This document defines the baseline for \gls{LSST} \gls{Alert Production} in the first year of \gls{LSST} operations in the absence of \gls{DRP} derived templates. 
+}
+
+
 
 % Change history defined here.
 % Order: oldest first.
 % Fields: VERSION, DATE, DESCRIPTION, OWNER NAME.
 % See LPM-51 for version number policy.
 \setDocChangeRecord{%
-  \addtohist{1}{2019-10-17}{First draft.}{Leanne Guy}
+  \addtohist{1}{2019-10-22}{First draft.}{Leanne Guy}
 }
-
 
 \begin{document}
 
 % Create the title page.
+% Table of contents is added automatically with the "toc" class option.
 \maketitle
 
-% Uncomment to add title page and change record
-% use \mkshorttitle to remove the extra pages
 
-% document content
+% ADD CONTENT HERE ... a file per section can be good for editing
 \input{alerts}
 
 \appendix
 % Include all the relevant bib files.
 % https://lsst-texmf.lsst.io/lsstdoc.html#bibliographies
-\section{References}
-\label{sec:refs}
-\bibliography{local,lsst,lsst-dm,refs_ads,refs,books}
+%\section{References}
+\label{sec:bib}
+\bibliography{lsst,lsst-dm,refs_ads,refs,books}
 
-% Make sure lsst-texmf/bin/generateAcronyms.py is in your path
-\section{Acronyms used in this document}\label{sec:acronyms}
+%Make sure lsst-texmf/bin/generateAcronyms.py is in your path
+%\section{Acronyms used in this document}\label{sec:acronyms}
+%\input{acronyms.tex}
+%Unccomment these if you want old style acronyms
 \label{sec:acronyms}
-\input{acronyms.tex}
-
-% If you want glossary uncomment below -- comment out the two lines above
+\newpage
 \printglossaries
 
 \end{document}
